@@ -5,6 +5,10 @@ const { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
   container: {
-    backgroundColor: '#FBFAFA',
+    
   },
+  button: {
+    margin: 10,
+    marginTop: 30,
+  }
 });

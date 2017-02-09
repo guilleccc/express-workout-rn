@@ -79,7 +79,7 @@ export default {
 
 
   // Color
-  brandPrimary: '#5067FF',
+  brandPrimary: '#ff0040',
   brandInfo: '#5bc0de',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -114,13 +114,13 @@ export default {
 
 
   // Header
-  iosToolbarBtnColor: '#007aff',
-  toolbarDefaultBg: (Platform.OS === 'ios') ? '#F8F8F8' : '#4179F7',
+  iosToolbarBtnColor: '#fff',
+  toolbarDefaultBg: (Platform.OS === 'ios') ? '#2f3b49' : '#2f3b49',
   toolbarHeight: (Platform.OS === 'ios') ? 64 : 56,
   toolbarIconSize: (Platform.OS === 'ios') ? 20 : 22,
   toolbarInputColor: '#CECDD2',
   toolbarInverseBg: '#222',
-  toolbarTextColor: (Platform.OS === 'ios') ? '#000' : '#fff',
+  toolbarTextColor: (Platform.OS === 'ios') ? '#fff' : '#fff',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
   },
@@ -134,15 +134,15 @@ export default {
 
   // InputGroup
   inputFontSize: 15,
-  inputBorderColor: '#D9D5DC',
+  inputBorderColor: 'yellow',
   inputSuccessBorderColor: '#2b8339',
   inputErrorBorderColor: '#ed2f2f',
 
   get inputColor() {
-    return this.textColor;
+    return "white";
   },
   get inputColorPlaceholder() {
-    return '#575757';
+    return '#4C505C';
   },
 
   inputGroupMarginBottom: 10,
@@ -164,23 +164,23 @@ export default {
 
 
   // List
-  listBorderColor: '#ACAAAB',
+  listBorderColor: '#ffffff33',
   // listBorderColor: '#ddd',
-  listDividerBg: '#ddd',
+  listDividerBg: '#1E222D',
   listItemHeight: 45,
   listItemPadding: 9,
-  listNoteColor: '#808080',
+  listNoteColor: '#ff8080',
   listNoteSize: 13,
 
 
   // Progress Bar
-  defaultProgressColor: '#E4202D',
+  defaultProgressColor: '#ff013d',
   inverseProgressColor: '#1A191B',
 
 
   // Radio Button
   radioBtnSize: (Platform.OS === 'ios') ? 25 : 23,
-  radioColor: '#7e7e7e',
+  radioColor: '#ff0040',
 
   get radioSelectedColor() {
     return color(this.radioColor).darken(0.2).hexString();
@@ -199,7 +199,7 @@ export default {
 
 
   // Text
-  textColor: '#000',
+  textColor: '#666',
   inverseTextColor: '#fff',
 
 
@@ -220,7 +220,7 @@ export default {
 
   dropdownBg: '#000',
   dropdownLinkColor: '#414142',
-  inputLineHeight: 24,
+  inputLineHeight: 34,
   jumbotronBg: '#C9C9CE',
   jumbotronPadding: 30,
 };

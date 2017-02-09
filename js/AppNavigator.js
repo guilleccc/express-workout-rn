@@ -8,8 +8,11 @@ import { actions } from 'react-native-navigation-redux-helpers';
 import { closeDrawer } from './actions/drawer';
 
 import Login from './components/login/';
+import RoutineCompleted from './components/routineCompleted';
 import Home from './components/home/';
-import BlankPage from './components/blankPage';
+import VideoPage from './components/videoPage';
+import Settings from './components/settings';
+import SelectRountine from './components/selectRoutine';
 import SplashPage from './components/splashscreen/';
 import SideBar from './components/sideBar';
 import { statusBarColor } from './themes/base-theme';
@@ -75,14 +78,18 @@ class AppNavigator extends Component {
     switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
-      case 'login':
-        return <Login />;
       case 'home':
         return <Home />;
-      case 'blankPage':
-        return <BlankPage />;
+      case 'settings':
+        return <Settings />;
+      case 'videoPage':
+        return <VideoPage option={props.scene.route.routineOption} level={props.scene.route.level} />;
+      case 'selectRoutine':
+        return <SelectRountine level={props.scene.route.level} />;
+      case 'RoutineCompleted':
+        return <RoutineCompleted elapsedTime={props.scene.route.elapsedTime} totalTime={props.scene.route.totalTime}  />;
       default :
-        return <Login />;
+        return <Home />;
     }
   }
 
@@ -117,7 +124,7 @@ class AppNavigator extends Component {
       >
         <StatusBar
           backgroundColor={statusBarColor}
-          barStyle="default"
+          barStyle="light-content"
         />
         <NavigationCardStack
           navigationState={this.props.navigation}
