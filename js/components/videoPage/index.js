@@ -44,7 +44,7 @@ class VideoPage extends Component {
     this.timeInSeconds = [30, 45, 60];
     this.totalTime = this.timeInSeconds[this.props.option] * 10;
     this.videos = [
-      require('../../../video/video00.mp4'), // TODO clean
+
       require('../../../video/jumpingjack.mp4'),
       require('../../../video/wallsit.mp4'),
       require('../../../video/pushupeasy.mp4'),
@@ -55,55 +55,66 @@ class VideoPage extends Component {
       require('../../../video/plank.mp4'),
       require('../../../video/highkneesslow.mp4'),
       require('../../../video/lunge.mp4'),
+      require('../../../video/pushupeasy.mp4'), // TODO (pushup)
+      require('../../../video/plankleftside.mp4'), // Intermediate
+      require('../../../video/plankrightside.mp4'),
+      require('../../../video/highkneesfast.mp4'),
+      require('../../../video/deadbug.mp4'),
+      require('../../../video/superman.mp4'),
     ];
-    this.videosWithEnding = [2, 8];
+    this.videosWithEnding = [1, 7, 11, 12];
     this.rutines = [
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      [10, 9, 5, 4, 5, 6, 7, 8, 9, 10],
+      [0, 1, 8, 3, 4, 5, 6, 7, 14, 9],
+      [13, 0, 4, 9, 2, 6, 14, 15, 11, 12],
     ]
-    
-    
+
+
     this.state = {
         previousTime: 3,
         currentTime: 0, // the time for the current video/exercise
         timeToDisplay: 0, // should be the integer amount of currentTime
         elapsedTime: 0, // sume of all the times (in each video)
         progress: 0,
-        currentVideo: 1,
+        currentVideo: 0,
         paused: false,
     };
     this.interval = null;
   }
-  
+
   getVideoURL() {
     if (this.state.currentVideo >= this.videos.length) {
       return this.videos[0];
     } else {
-      var rutine = this.rutines[this.props.level];
-      return this.videos[ rutine[this.state.currentVideo-1] ];
+      return this.videos[ this.getCurrentExercise() ];
     }
   }
-  
-  getRepeatVideoValue() {
-    return (this.videosWithEnding.indexOf( this.state.currentVideo) == -1);
+
+  getCurrentExercise() {
+    var rutine = this.rutines[this.props.level];
+    return rutine[this.state.currentVideo];
   }
-  
+
+  getRepeatVideoValue() {
+    return (this.videosWithEnding.indexOf( this.getCurrentExercise()) == -1);
+  }
+
   changeVideo() {
+    var limit = 9;
     this.setState({elapsedTime: this.state.elapsedTime + this.state.currentTime });
-    if (this.state.currentVideo >= 10) {
+    if (this.state.currentVideo >= limit) {
       clearInterval(this.timeInterval);
       this.props.popRoute(this.props.navigation.key);
       this.props.popRoute(this.props.navigation.key);
       this.props.pushRoute({ key: 'RoutineCompleted', index: 0, elapsedTime: this.state.elapsedTime, totalTime: this.totalTime }, this.props.navigation.key);
     } else {
       this.setState({currentVideo: this.state.currentVideo + 1 });
-      // Reset time 
+      // Reset time
       this.setState({currentTime: 0 });
       this.setState({previousTime: 3 });
     }
-    
+
   }
-  
+
   updateTime() {
     if (this.state.previousTime > 0) {
       this.setState({previousTime: this.state.previousTime - 0.2 });
@@ -115,7 +126,7 @@ class VideoPage extends Component {
       }
     }
   }
-  
+
   updateProgressBar() {
     var _progress = this.state.currentTime / this.timeInSeconds[this.props.option];
     this.setState({progress: _progress});
@@ -123,21 +134,21 @@ class VideoPage extends Component {
 
   componentDidMount() {
     this.createInterval();
-    
+
   }
-  
+
   createInterval() {
     this.timeInterval = TimerMixin.setInterval( () => {
       this.updateTime();
       this.updateProgressBar();
     }, 200);
   }
-  
+
   componentWillUnmount() {
     clearInterval(this.timeInterval);
-    
+
   }
-  
+
   pauseOrPlay() {
     if (this.state.paused) {
       this.createInterval();
@@ -146,7 +157,7 @@ class VideoPage extends Component {
     }
     this.setState({paused: !this.state.paused})
   }
-  
+
   getProgressText() {
     if (this.state.previousTime > 0) {
       var dots = 3 - parseInt (this.state.previousTime);
@@ -159,7 +170,7 @@ class VideoPage extends Component {
       return this.state.timeToDisplay + " / " + this.timeInSeconds[this.props.option];
     }
   }
-  
+
   controlButtonName() {
     if (this.state.paused) {
       return "ios-play"
@@ -167,7 +178,7 @@ class VideoPage extends Component {
       return "ios-pause"
     }
   }
-  
+
   popRoute() {
     Alert.alert(
       I18n.t('videoPage.exitTitle'),
@@ -177,7 +188,7 @@ class VideoPage extends Component {
         {text: I18n.t('videoPage.exitOK'), onPress: () => this.props.popRoute(this.props.navigation.key)},
       ]
     );
-    
+
   }
 
   render() {
@@ -193,11 +204,11 @@ class VideoPage extends Component {
           <Title>{I18n.t('videoPage.title')}</Title>
 
         </Header>
-        
+
         <Image source={imageBG} style={{flex: 1, width: null, height: null}}>
         <Content>
-          
-          <Video 
+
+          <Video
             source={this.getVideoURL()}
              rate={1.0}                     // 0 is paused, 1 is normal.
              volume={1.0}                   // 0 is muted, 1 is normal.
@@ -214,7 +225,7 @@ class VideoPage extends Component {
              onEnd={this.onEnd}             // Callback when playback finishes
              onError={this.videoError}      // Callback when video cannot be loaded
              style={styles.backgroundVideo} />
-          
+
           <View style={styles.progressContainer}>
             <View style={styles.progressContent}>
               <Button bordered rounded small style={styles.controlButton} onPress={() => this.pauseOrPlay()}>
@@ -231,21 +242,21 @@ class VideoPage extends Component {
               </Button>
             </View>
           </View>
-          
+
           <Card style={{ margin: 10, backgroundColor: '#00000000', borderColor: '#90818c', borderWidth: 2, }}>
-            
+
             <CardItem header style={{backgroundColor: '#00000033'}}>
               <Text style={{color: '#ff0040'}}>
-                  {I18n.t('exercises')[this.state.currentVideo-1].title} ({this.state.currentVideo}/10)
+                  {I18n.t('exercises')[this.getCurrentExercise()].title} ({this.state.currentVideo+1}/10)
               </Text>
             </CardItem>
-            
-            {I18n.t('exercises')[this.state.currentVideo-1].instructions.map((item, i) =>
+
+            {I18n.t('exercises')[this.getCurrentExercise()].instructions.map((item, i) =>
             <CardItem key={i}>
               <Text style={{color: 'white'}}>{item}</Text>
             </CardItem>
             )}
-            
+
           </Card>
 
         </Content>

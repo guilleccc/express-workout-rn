@@ -44,17 +44,17 @@ class Home extends Component {
       key: React.PropTypes.string,
     }),
   }
-  
+
   pushRoute(route, index) {
     this.props.setIndex(index);
     this.props.pushRoute({ key: route, index: 0 }, this.props.navigation.key);
   }
-  
+
   selectRoutine(index) {
     this.props.setIndex(index);
     this.props.pushRoute({ key: 'selectRoutine', level: index }, this.props.navigation.key);
   }
-  
+
   componentWillMount() {
     //I18n.locale = this.props.language;
     AsyncStorage.getItem(STORAGE_KEY_LANGUAGE, (err, result) => {
@@ -64,7 +64,7 @@ class Home extends Component {
       }
     });
   }
-  
+
   componentWillReceiveProps() {
     //I18n.locale = this.props.language;
   }
@@ -74,12 +74,12 @@ class Home extends Component {
     return (
       <Container theme={myTheme} style={styles.container}>
         <Header>
-          
+
           <Button transparent onPress={() => this.pushRoute('settings')}>
             <Icon name="ios-settings" />
           </Button>
           <Title style={{}}>Express Workout</Title>
-          
+
         </Header>
 
         <Image source={imageBG} style={{flex: 1, width: null, height: null}}>
@@ -89,27 +89,27 @@ class Home extends Component {
               onPress={() => this.selectRoutine(0)}>
               <Thumbnail source={thumb1} size={40} />
               <Text style={{color: 'white'}}>{I18n.t('home.beginnerButton')}</Text>
-              <Text note style={{color: 'white'}}>Basic exercises for people don't move oftenly.</Text>  
+              <Text note style={{color: 'white'}}>Basic exercises for people who do not train often.</Text>
             </ListItem>
-            
+
             <ListItem style={{}}
               onPress={() => this.selectRoutine(1)}>
               <Thumbnail source={thumb2} size={40} />
               <Text style={{color: 'white'}}>{I18n.t('home.intermediateButton')}</Text>
-              <Text note style={{color: 'white'}}>Exercises for people whoes do workout from time to time.</Text>
-              
+              <Text note style={{color: 'white'}}>Exercises for people whoes do workout sometimes.</Text>
+
             </ListItem>
           </List>
-          
+
         </Content>
-        
-        
+
+
         <Text style={styles.footerText}>"I can {"\n"}... and I will."</Text>
-          
+
         <Footer style={styles.footer}>
           <Image source={mainImage} style={{ flex: 1, resizeMode: 'contain', height: 250 }} >
           </Image>
-          
+
         </Footer>
           </Image>
       </Container>

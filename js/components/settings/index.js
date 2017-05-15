@@ -41,7 +41,7 @@ class Settings extends Component {
       key: React.PropTypes.string,
     }),
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +57,7 @@ class Settings extends Component {
     AsyncStorage.getItem(STORAGE_KEY_INFO, (err, result) => {
       if (result) {
         var info = JSON.parse(result)
-        
+
         if (info.gender) {
           this.setState({ selectedGender: info.gender, });
         }
@@ -67,17 +67,17 @@ class Settings extends Component {
         if (info.age) {
           this.setState({ age: info.age.toString() });
         }
-        
+
       }
     });
-      
+
   }
-  
+
   onLanguageChange (value: string) {
-    
+
     AsyncStorage.setItem(STORAGE_KEY_LANGUAGE, value);
     this.props.setLanguage(value);
-    
+
     //this.props.setLanguage(value);
     //console.warn(this.props.language);
   }
@@ -86,21 +86,21 @@ class Settings extends Component {
         selectedGender: value,
     });
   }
-  
+
   setUser(name) {
     this.props.setUser(name);
   }
-  
+
   componentWillMount() {
     //I18n.locale = this.props.language;
     //console.warn(this.props.language);
-    
+
   }
-  
+
   componentWillUnmount() {
     //I18n.locale = this.props.language;
     //console.warn(this.props.language);
-    var _info = { 
+    var _info = {
       gender: this.state.selectedGender,
       weight: this.state.weight,
       weightUnit: "lb",
@@ -108,11 +108,11 @@ class Settings extends Component {
     };
     AsyncStorage.setItem(STORAGE_KEY_INFO, JSON.stringify(_info));
   }
-  
+
   popRoute() {
     this.props.popRoute(this.props.navigation.key);
   }
-  
+
   updateWeight(value) {
     if ((parseInt(Number(value)) == value) && value <= 300 && value >= 0) {
       this.setState({weight: value});
@@ -120,7 +120,7 @@ class Settings extends Component {
       alert("Invalid weight. This value should be between 0 and 300.");
     }
   }
-  
+
   updateAge(value) {
     if (parseInt(Number(value)) == value && value <= 100 && value >= 0) {
       this.setState({age: value});
@@ -142,15 +142,15 @@ class Settings extends Component {
           <Title>{I18n.t('settings.settings')}</Title>
 
         </Header>
-        
-        
+
+
         <Content style={styles.content}>
-          
+
             <List style={{backgroundColor: '#292F3F'}}>
               <ListItem itemDivider>
                   <Text></Text>
               </ListItem>
-              
+
               <ListItem iconLeft>
                 <FontAwesome name="flag-checkered" style={styles.inputIcon} />
                 <Text style={styles.inputLabel}>{I18n.t('settings.language')}:</Text>
@@ -170,7 +170,7 @@ class Settings extends Component {
               <ListItem itemDivider>
                   <Text></Text>
               </ListItem>
-              
+
               <ListItem iconLeft="false" iconRight="false" >
                 <FontAwesome name="transgender" style={styles.inputIcon} />
                 <Text style={styles.inputLabel}>{I18n.t('settings.gender')}:</Text>
@@ -195,22 +195,22 @@ class Settings extends Component {
                 </View>
               </ListItem>
 
-              
+
               <ListItem>
                 <View style={styles.inputContainer}>
-                
+
                   <FontAwesome name="birthday-cake" style={styles.inputIcon} />
                   <Text style={styles.inputLabelWithPadding}>Age:</Text>
                   <Input style={styles.input} placeholder="Age" keyboardType="numeric" defaultValue={this.state.age} onChangeText={(text) => this.updateAge(text)} />
                 </View>
               </ListItem>
-              
-              
+
+
             </List>
-            
+
         </Content>
-        
-        
+
+
       </Container>
     );
   }

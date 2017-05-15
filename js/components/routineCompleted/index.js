@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, Share } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Title, Content, Text, Button, Icon, H1 } from 'native-base';
@@ -29,7 +29,7 @@ class RoutineCompleted extends Component {
       key: React.PropTypes.string,
     }),
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -54,21 +54,21 @@ class RoutineCompleted extends Component {
   popRoute() {
     this.props.popRoute(this.props.navigation.key);
   }
-  
+
   getElapsedTime() {
     var m = parseInt(this.props.elapsedTime / 60);
     var s = parseInt(this.props.elapsedTime - (m * 60));
     s = (s >= 10) ? s : "0" + s;
     return m + ":" + s;
   }
-  
+
   calculatePercentage() {
     return this.props.elapsedTime / this.props.totalTime;
   }
-  
+
   /*
   http://fitnowtraining.com/2012/01/formula-for-calories-burned/
-  Men: 
+  Men:
   Calories Burned = [(Age x 0.2017) — (Weight x 0.09036) + (Heart Rate x 0.6309) — 55.0969] x Time / 4.184.
   Women:
   Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) — 20.4022] x Time / 4.184.
@@ -81,6 +81,26 @@ class RoutineCompleted extends Component {
     var calories = [(age * 0.2017) - (weight * 0.09036) + (hearthRate * 0.6309) - 55.0969] * (time / 4.184);
     var calories = [(age * 0.074) - (weight * 0.05741) + (hearthRate * 0.4472) - 20.4022] * (time / 4.184);
     return parseInt( calories);
+  }
+
+  _shareMessage() {
+    Share.share({
+      message: 'I have completed my workout using Express Workout'
+    })
+    .then(this._showShareResult)
+    .catch((error) => this.setState({result: 'error: ' + error.message}));
+  }
+
+  _showShareResult(result) {
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        this.setState({result: 'shared with an activityType: ' + result.activityType});
+      } else {
+        this.setState({result: 'shared'});
+      }
+    } else if (result.action === Share.dismissedAction) {
+      this.setState({result: 'dismissed'});
+    }
   }
 
   render() {
@@ -106,29 +126,30 @@ class RoutineCompleted extends Component {
                 <H1 style={{ fontSize: 35, color: 'white' }}>{this.calculateCalories()} </H1>
                 <Text style={{ bottom: 0, color: 'white' }}>calories</Text>
               </View>
-              
+
             </Row>
             <Row style={{ height: 80, justifyContent: 'center' }}>
               <Text style={{ color: '#ff0040' }}>
                 Time elapsed: {this.getElapsedTime()}
               </Text>
             </Row>
-            
+
             <Row style={{ justifyContent: 'center', }}>
-              <Button rounded style={{ backgroundColor: '#3B5998' }}>
-                  <Icon name="logo-facebook" />
+              <Button rounded style={{ backgroundColor: '#3B5998' }}
+                onPress={this._shareMessage}>
+                  Share
               </Button>
             </Row>
-            
+
             <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
               <Button padder block style={{ width: 200, marginTop: 50, alignItems: 'center' }} onPress={() => this.popRoute()}>
                 <Icon name='ios-home' />
                 Home
               </Button>
             </View>
-            
+
           </Grid>
-          
+
         </Content>
         </Image>
       </Container>

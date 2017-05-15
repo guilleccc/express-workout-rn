@@ -1,6 +1,7 @@
 /*
 Most of the exercises are based on:
 - http://greatist.com/move/7-minute-workout-that-science-says-works
+Some exercises: https://www.bodybuilding.com/exercises/finder/
 */
 export const basicTranslations = {
   en: {
@@ -89,7 +90,13 @@ export const basicTranslations = {
                   "Lower chest to floor, keeping legs, hips, and back in a straight line.",
                   "Press into palms to lift back up."]
       },
-      { title: "Side Plank",
+      { title: "Side Plank (Left side)",
+        instructions: ["Lie on one side with legs and feet stacked on top of one another.",
+                  "Lift hips to prop body up on elbow, keeping feet stacked.",
+                  "Press forearm into ground to keep torso and hips in a straight line.",
+                  "Hold",]
+      },
+      { title: "Side Plank (Right side)",
         instructions: ["Lie on one side with legs and feet stacked on top of one another.",
                   "Lift hips to prop body up on elbow, keeping feet stacked.",
                   "Press forearm into ground to keep torso and hips in a straight line.",
@@ -100,8 +107,21 @@ export const basicTranslations = {
                   "Bring knees to same height as hips, thighs parallel to floor, and try not to lean back.",
                   "Stay on balls of feet and alternate legs as fast as possible.",]
       },
+      { title: "Dead Bug",
+        instructions: ["Begin lying on your back with your hands extended above you toward the ceiling.",
+                  "Bring your feet, knees, and hips up to 90 degrees.",
+                  "Exhale hard to bring your ribcage down and flatten your back onto the floor, rotating your pelvis up and squeezing your glutes. Hold this position throughout the movement. This will be your starting position.",
+                  "Initiate the exercise by extending one leg, straightening the knee and hip to bring the leg just above the ground.",
+                  "Maintain the position of your lumbar and pelvis as you perform the movement, as your back is going to want to arch. Stay tight and return the working leg to the starting position.",
+                  "Repeat on the opposite side, alternating until the set is complete.",]
+      },
+      { title: "Superman",
+        instructions: ["To begin, lie straight and face down on the floor or exercise mat. Your arms should be fully extended in front of you. This is the starting position.",
+                  "Raise one arm and leg at a time. Simply elevating your one leg, and the opposite arm. ",
+                  "Slowly begin to lower your arms, legs and chest back down to the starting position while inhaling.",]
+      },
     ],
-    
+
   },
   fr: {
     settings: {
@@ -189,7 +209,13 @@ export const basicTranslations = {
                   "Bas de la poitrine au plancher, en gardant les jambes, les hanches et le dos en ligne droite.",
                   "Appuyez dans les paumes pour le soulever."]
       },
-      { title: "Planche latérale",
+      { title: "Planche latérale (Côté gauche)",
+        instructions: ["Allongez-vous d'un côté avec les jambes et les pieds empilés les uns sur les autres.",
+                  "Soulevez les hanches pour soutenir le corps sur le coude, en gardant les pieds empilés.",
+                  "Appuyez l'avant-bras dans le sol pour garder le torse et les hanches en ligne droite.",
+                  "Tenir",]
+      },
+      { title: "Planche latérale (Côté droit)",
         instructions: ["Allongez-vous d'un côté avec les jambes et les pieds empilés les uns sur les autres.",
                   "Soulevez les hanches pour soutenir le corps sur le coude, en gardant les pieds empilés.",
                   "Appuyez l'avant-bras dans le sol pour garder le torse et les hanches en ligne droite.",
@@ -200,6 +226,19 @@ export const basicTranslations = {
                   "Apportez les genoux à la même hauteur que les hanches, les cuisses parallèles au plancher, et essayez de ne pas vous pencher en arrière.",
                   "Restez sur les balles de pieds et alterner les jambes aussi vite que possible.",]
       },
+      { title: "Dead Bug",
+        instructions: ["Commencez de couché sur le dos avec vos mains étendues au-dessus de vous vers le plafond.",
+                  "Apportez les pieds, les genoux et les hanches jusqu'à 90 °.",
+                  "Exhale fort pour amener votre cage thoracique vers le bas et aplatiez votre dos sur le sol, en tournant votre bassin vers le haut et en serrant vos jambes. Tenir cette position tout au long du mouvement. Ce sera votre position de départ.",
+                  "Lancez l'exercice en prolongeant une jambe, en redressant le genou et la hanche pour amener la jambe juste au-dessus du sol.",
+                  "Maintenez la position de votre lombaire et votre bassin lorsque vous effectuez le mouvement, car votre dos voudra arroser. Restez serré et retournez la jambe de travail à la position de départ.",
+                  "Répétez sur le côté opposé, en alternant jusqu'à ce que l'ensemble soit terminé.",]
+      },
+      { title: "Superman",
+        instructions: ["Pour commencer, lissez droit et face vers le bas sur le sol ou un tapis d'exercice. Vos bras devraient être complètement étendus en face de vous. C'est la position de départ.",
+                   "Soulevez un bras et une jambe à la fois. Éloignez simplement votre jambe et le bras opposé",
+                   "Commencez lentement à abaisser les bras, les jambes et la poitrine jusqu'à la position de départ tout en inhalant.",]
+      },
     ],
   },
   es: {
@@ -288,7 +327,13 @@ export const basicTranslations = {
                   "Baje el pecho al piso, manteniendo las piernas, las caderas y la espalda en línea recta.",
                   "Presione las palmas de sus manos para levantarse de nuevo."]
       },
-      { title: "Plancha lateral",
+      { title: "Plancha lateral (Lado izquierdo)",
+        instructions: ["Acuéstese de un lado con las piernas y los pies encima del otro.",
+                  "Levante las caderas para apoyar el cuerpo sobre el codo, manteniendo los pies apilados.",
+                  "Presione el antebrazo en el suelo para mantener el torso y las caderas en línea recta.",
+                  "Mantengáse",]
+      },
+      { title: "Plancha lateral (Lado derecho)",
         instructions: ["Acuéstese de un lado con las piernas y los pies encima del otro.",
                   "Levante las caderas para apoyar el cuerpo sobre el codo, manteniendo los pies apilados.",
                   "Presione el antebrazo en el suelo para mantener el torso y las caderas en línea recta.",
@@ -299,7 +344,20 @@ export const basicTranslations = {
                   "Lleve las rodillas a la misma altura que las caderas, los muslos paralelos al suelo, e intenta no recostarte.",
                   "Alterne las piernas lo más rápido posible.",]
       },
+      { title: "Dead Bug",
+        instructions: ["Comience acostado sobre su espalda con sus manos extendidas sobre usted hacia el techo.",
+                   "Traiga sus pies, rodillas y caderas hasta 90 grados.",
+                   "Exhale profundamente hasta traer su caja torácica hacia abajo y aplanar su espalda en el suelo, girando la pelvis hacia arriba y apretando los glúteos. Mantener esta posición durante todo el movimiento. Esta será su posición inicial.",
+                   "Inicie el ejercicio extendiendo una pierna, enderezando la rodilla y la cadera para traer la pierna justo por encima del suelo.",
+                   "Mantenga la posición de su columna lumbar y pelvis mientras realiza el movimiento, ya que su espalda va a querer arquear. Manténgase apretado y regrese la pierna de trabajo a la posición inicial.",
+                   "Repita en el lado opuesto, alternando hasta que el conjunto esté completo.",]
+      },
+      { title: "Superman",
+        instructions: ["Para comenzar, acostarse recto y boca abajo en el suelo o en la colchoneta de ejercicios, tus brazos deben estar completamente extendidos delante de ti. Esta es la posición inicial.",
+                   "Levanta un brazo y una pierna a la vez, simplemente eleva tu pierna y el brazo opuesto.",
+                   "Lentamente comienza a bajar los brazos, las piernas y el pecho hasta la posición inicial mientras inhala.",]
+      },
     ],
   },
-  
+
 }
