@@ -35,14 +35,14 @@ class SelectRoutine extends Component {
     this.state = {
         option: 1
     };
-    
+
   }
   popRoute() {
     this.props.popRoute(this.props.navigation.key);
   }
   onSelectPressed () {
     this.props.pushRoute({ key: 'videoPage', routineOption: this.state.option, level: this.props.level }, this.props.navigation.key);
-  	
+
   }
   toggleSwitch(opt) {
     this.setState({ option: opt });
@@ -65,26 +65,26 @@ class SelectRoutine extends Component {
         <Image source={imageBG} style={{flex: 1, width: null, height: null}}>
         <Content>
           <List>
-            
+
             <ListItem onPress={() => this.toggleSwitch(0)}>
               <Radio selected={this.state.option==0} onPress={() => this.toggleSwitch(0)} />
               <Text style={{color: 'white'}}>5 min</Text>
-              <Text style={{color: 'white', fontSize: 12}}>Each exercise will take around 30 seconds.</Text>  
+              <Text style={{color: 'white', fontSize: 12}}>{I18n.t('selectRoutine.explanation')} 30 {I18n.t('selectRoutine.seconds')}.</Text>
             </ListItem>
             <ListItem onPress={() => this.toggleSwitch(1)}>
               <Radio selected={this.state.option==1} onPress={() => this.toggleSwitch(1)} />
               <Text style={{color: 'white'}}>8 min </Text>
-              <Text style={{color: 'white', fontSize: 12}}>Each exercise will take around 45 seconds.</Text>  
+              <Text style={{color: 'white', fontSize: 12}}>{I18n.t('selectRoutine.explanation')} 45 {I18n.t('selectRoutine.seconds')}.</Text>
             </ListItem>
             <ListItem onPress={() => this.toggleSwitch(2)}>
               <Radio selected={this.state.option==2} onPress={() => this.toggleSwitch(2)} />
               <Text style={{color: 'white'}}>10 min</Text>
-              <Text style={{color: 'white', fontSize: 12}}>Each exercise will take around 1 minute.</Text>  
+              <Text style={{color: 'white', fontSize: 12}}>{I18n.t('selectRoutine.explanation')} 1 {I18n.t('selectRoutine.minute')}.</Text>
             </ListItem>
-            
+
           </List>
-          
-          <Button padder block iconRight 
+
+          <Button padder block iconRight
                   onPress={() => {this.onSelectPressed()}}
                   style={styles.button}>
                     <Icon name='ios-arrow-forward' />

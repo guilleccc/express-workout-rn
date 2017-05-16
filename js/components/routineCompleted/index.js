@@ -12,6 +12,7 @@ import myTheme from '../../themes/base-theme';
 import styles from './styles';
 import { STORAGE_KEY_INFO } from '../../components/settings';
 import { AsyncStorage, View } from 'react-native';
+import I18n from 'react-native-i18n'
 
 const imageBG = require("../../../images/bg.png");
 const {
@@ -47,6 +48,7 @@ class RoutineCompleted extends Component {
         if (info.age) {
           this.setState({ age: info.age.toString() });
         }
+
       }
     });
   }
@@ -78,8 +80,14 @@ class RoutineCompleted extends Component {
     var weight = this.state.weight ? this.state.weight : 155; // [lb]
     var hearthRate = 148; // [bpm]
     var time = (this.props.elapsedTime / 60); // [m]
-    var calories = [(age * 0.2017) - (weight * 0.09036) + (hearthRate * 0.6309) - 55.0969] * (time / 4.184);
-    var calories = [(age * 0.074) - (weight * 0.05741) + (hearthRate * 0.4472) - 20.4022] * (time / 4.184);
+
+    if (this.state.selectedGender == "male") {
+
+      var calories = [(age * 0.2017) - (weight * 0.09036) + (hearthRate * 0.6309) - 55.0969] * (time / 4.184);
+    } else {
+      var calories = [(age * 0.074) - (weight * 0.05741) + (hearthRate * 0.4472) - 20.4022] * (time / 4.184);
+    }
+
     return parseInt( calories);
   }
 
@@ -88,18 +96,15 @@ class RoutineCompleted extends Component {
       message: 'I have completed my workout using Express Workout'
     })
     .then(this._showShareResult)
-    .catch((error) => this.setState({result: 'error: ' + error.message}));
   }
 
   _showShareResult(result) {
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
-        this.setState({result: 'shared with an activityType: ' + result.activityType});
+        //this.setState({result: 'shared with an activityType: ' + result.activityType});
       } else {
-        this.setState({result: 'shared'});
+
       }
-    } else if (result.action === Share.dismissedAction) {
-      this.setState({result: 'dismissed'});
     }
   }
 
@@ -113,7 +118,7 @@ class RoutineCompleted extends Component {
             <Icon name="ios-arrow-back" />
           </Button>
 
-          <Title>Workout Completed</Title>
+          <Title>{I18n.t('routineCompleted.title')}</Title>
 
         </Header>
 
@@ -124,27 +129,28 @@ class RoutineCompleted extends Component {
               <Progress.Circle progress={this.calculatePercentage()} color={"#ff0040"} size={170} thickness={20} />
               <View style={styles.textCalories}>
                 <H1 style={{ fontSize: 35, color: 'white' }}>{this.calculateCalories()} </H1>
-                <Text style={{ bottom: 0, color: 'white' }}>calories</Text>
+                <Text style={{ bottom: 0, color: 'white' }}>{I18n.t('routineCompleted.calories')}</Text>
               </View>
 
             </Row>
             <Row style={{ height: 80, justifyContent: 'center' }}>
               <Text style={{ color: '#ff0040' }}>
-                Time elapsed: {this.getElapsedTime()}
+                {I18n.t('routineCompleted.timeElapsed')}: {this.getElapsedTime()}
               </Text>
             </Row>
 
             <Row style={{ justifyContent: 'center', }}>
-              <Button rounded style={{ backgroundColor: '#3B5998' }}
+              <Button padder block style={{ width: 200, backgroundColor: '#3B5998' }}
                 onPress={this._shareMessage}>
-                  Share
+                  <Icon name='md-share' />
+                  {I18n.t('routineCompleted.share')}
               </Button>
             </Row>
 
             <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
               <Button padder block style={{ width: 200, marginTop: 50, alignItems: 'center' }} onPress={() => this.popRoute()}>
                 <Icon name='ios-home' />
-                Home
+                {I18n.t('routineCompleted.home')}
               </Button>
             </View>
 

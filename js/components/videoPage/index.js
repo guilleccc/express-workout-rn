@@ -44,7 +44,6 @@ class VideoPage extends Component {
     this.timeInSeconds = [30, 45, 60];
     this.totalTime = this.timeInSeconds[this.props.option] * 10;
     this.videos = [
-
       require('../../../video/jumpingjack.mp4'),
       require('../../../video/wallsit.mp4'),
       require('../../../video/pushupeasy.mp4'),
@@ -62,6 +61,7 @@ class VideoPage extends Component {
       require('../../../video/deadbug.mp4'),
       require('../../../video/superman.mp4'),
     ];
+    this.lastVideo = 9;
     this.videosWithEnding = [1, 7, 11, 12];
     this.rutines = [
       [0, 1, 8, 3, 4, 5, 6, 7, 14, 9],
@@ -99,9 +99,9 @@ class VideoPage extends Component {
   }
 
   changeVideo() {
-    var limit = 9;
+
     this.setState({elapsedTime: this.state.elapsedTime + this.state.currentTime });
-    if (this.state.currentVideo >= limit) {
+    if (this.state.currentVideo >= this.lastVideo) {
       clearInterval(this.timeInterval);
       this.props.popRoute(this.props.navigation.key);
       this.props.popRoute(this.props.navigation.key);
@@ -128,8 +128,12 @@ class VideoPage extends Component {
   }
 
   updateProgressBar() {
-    var _progress = this.state.currentTime / this.timeInSeconds[this.props.option];
-    this.setState({progress: _progress});
+    if (this.state.currentVideo <= this.lastVideo) {
+      if (this.state.currentTime <= this.timeInSeconds[this.props.option]) {
+        var _progress = this.state.currentTime / this.timeInSeconds[this.props.option];
+        this.setState({progress: _progress});
+      }
+    }
   }
 
   componentDidMount() {
@@ -161,7 +165,7 @@ class VideoPage extends Component {
   getProgressText() {
     if (this.state.previousTime > 0) {
       var dots = 3 - parseInt (this.state.previousTime);
-      var _s = "Be ready ";
+      var _s = I18n.t('videoPage.ready');
       for(var i = 0; i<dots; i++) {
         _s += ".";
       }

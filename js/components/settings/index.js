@@ -77,6 +77,7 @@ class Settings extends Component {
 
     AsyncStorage.setItem(STORAGE_KEY_LANGUAGE, value);
     this.props.setLanguage(value);
+    I18n.locale = value;
 
     //this.props.setLanguage(value);
     //console.warn(this.props.language);
@@ -181,16 +182,16 @@ class Settings extends Component {
                   itemStyle={{color:"white"}}
                   selectedValue={this.state.selectedGender}
                   onValueChange={this.onGenderChange.bind(this)} >
-                    <Picker.Item label="Male" style={{color: 'red'}} color="red" value="male" />
-                    <Picker.Item label="Female" value="female" />
-                    <Picker.Item label="Other" value="other" />
+                    <Picker.Item label={I18n.t('settings.male')} style={{color: 'red'}} color="red" value="male" />
+                    <Picker.Item label={I18n.t('settings.female')} value="female" />
+                    <Picker.Item label={I18n.t('settings.other')} value="other" />
                 </Picker>
               </ListItem>
 
               <ListItem>
                 <View style={styles.inputContainer}>
                   <FontAwesome name="balance-scale" style={styles.inputIcon} />
-                  <Text style={styles.inputLabelWithPadding}>Weight: </Text>
+                  <Text style={styles.inputLabelWithPadding}>{I18n.t('settings.weight')}: </Text>
                   <Input style={styles.input} placeholder="Kg" keyboardType="numeric" defaultValue={this.state.weight} onChangeText={(text) => this.updateWeight(text)} />
                 </View>
               </ListItem>
@@ -200,8 +201,8 @@ class Settings extends Component {
                 <View style={styles.inputContainer}>
 
                   <FontAwesome name="birthday-cake" style={styles.inputIcon} />
-                  <Text style={styles.inputLabelWithPadding}>Age:</Text>
-                  <Input style={styles.input} placeholder="Age" keyboardType="numeric" defaultValue={this.state.age} onChangeText={(text) => this.updateAge(text)} />
+                  <Text style={styles.inputLabelWithPadding}>{I18n.t('settings.age')}:</Text>
+                  <Input style={styles.input} placeholder={I18n.t('settings.age')} keyboardType="numeric" defaultValue={this.state.age} onChangeText={(text) => this.updateAge(text)} />
                 </View>
               </ListItem>
 
